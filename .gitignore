@@ -1,0 +1,8 @@
+# JetBrains Config
+.idea/
+
+# Zig Cache
+.zig-cache/
+
+# Zig Builds
+zig-out/
