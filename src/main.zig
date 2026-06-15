@@ -13,7 +13,7 @@ const Renderer = struct {
     b: f32 = 0.0,
     c: f32 = 0.0,
 
-    cube_width: f32 = undefined,
+    cube_width: f32 = 20,
     horizontal_offset: f32 = undefined,
 
     z_buffer: [width * height]f32 = undefined,
@@ -38,9 +38,13 @@ const Renderer = struct {
         cube_z: f32,
         ch: u8,
     ) void {
-        const x = self.calculate_x(cube_x, cube_y, cube_z);
-        const y = self.calculate_y(cube_x, cube_y, cube_z);
-        const z = self.calculate_z(cube_x, cube_y, cube_z) + distance_from_cam;
+        const i = @trunc(cube_x);
+        const j = @trunc(cube_y);
+        const k = @trunc(cube_z);
+
+        const x = self.calculate_x(i, j, k);
+        const y = self.calculate_y(i, j, k);
+        const z = self.calculate_z(i, j, k) + distance_from_cam;
 
         const ooz = 1.0 / z;
 
@@ -87,7 +91,7 @@ pub fn main(init: std.process.Init) !void {
 
             while (cube_y < renderer.cube_width) : (cube_y += increment_speed) {
                 renderer.calculate_for_surface(cube_x, cube_y, -renderer.cube_width, '@');
-                renderer.calculate_for_surface(renderer.cube_width, cube_y, cube_y, '$');
+                renderer.calculate_for_surface(renderer.cube_width, cube_y, cube_x, '$');
                 renderer.calculate_for_surface(-renderer.cube_width, cube_y, -cube_x, '~');
 
                 renderer.calculate_for_surface(-cube_x, cube_y, renderer.cube_width, '#');
