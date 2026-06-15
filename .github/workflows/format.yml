@@ -1,0 +1,26 @@
+name: format
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    environment: Build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Use setup-zig
+        uses: mlugg/setup-zig@v2
+        with:
+          version: 0.16.0
+
+      - name: Linting
+        run: zig fmt . --check
+
+      - name: Format
+        run: zig fmt .
