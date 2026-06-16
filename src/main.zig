@@ -20,7 +20,7 @@ const Renderer = struct {
     buffer: [width * height]u8 = undefined,
 
     fn calculate_x(self: *const Renderer, i: f32, j: f32, k: f32) f32 {
-        return j * @sin(self.a) * @sin(self.b) * @cos(self.c) - k * @cos(self.a) * @sin(self.b) * @cos(self.c) + j * @sin(self.a) * @sin(self.c) + k * @sin(self.a) * @sin(self.c) + i * @cos(self.b) * @cos(self.c);
+        return j * @sin(self.a) * @sin(self.b) * @cos(self.c) - k * @cos(self.a) * @sin(self.b) * @cos(self.c) + j * @cos(self.a) * @sin(self.c) + k * @sin(self.a) * @sin(self.c) + i * @cos(self.b) * @cos(self.c);
     }
 
     fn calculate_y(self: *const Renderer, i: f32, j: f32, k: f32) f32 {
